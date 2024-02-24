@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-
 @Service
 public class TokenService {
 
     @Value("${api.security.token.secret}")
     private String secret;
+
     public String gerarToken(Usuario usuario) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
@@ -25,12 +25,12 @@ public class TokenService {
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())
                     .sign(algoritmo);
-        } catch (JWTCreationException exception) {
-            throw new RuntimeException("Erro ao gerar token jwt", exception);
+        } catch (JWTCreationException exception){
+            throw new RuntimeException("erro ao gerar token jwt", exception);
         }
     }
 
-    public String getsubjetct(String tokenJWT){
+    public String getSubject(String tokenJWT) {
         try {
             var algoritmo = Algorithm.HMAC256(secret);
             return JWT.require(algoritmo)
