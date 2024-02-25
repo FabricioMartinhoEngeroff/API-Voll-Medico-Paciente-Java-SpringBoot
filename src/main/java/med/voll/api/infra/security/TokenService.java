@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 @Service
 public class TokenService {
-
     @Value("${api.security.token.secret}")
     private String secret;
 
@@ -44,7 +43,7 @@ public class TokenService {
     }
 
     private Instant dataExpiracao() {
-        return LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(20).toInstant(ZoneOffset.of("-03:00"));
     }
 
 
